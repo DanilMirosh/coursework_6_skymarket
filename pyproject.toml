@@ -16,6 +16,7 @@ psycopg2 = "^2.9.5"
 django-cors-headers = "^3.13.0"
 drf-spectacular = "^0.24.2"
 djoser = "^2.1.0"
+drf-yasg = "^1.21.4"
 
 
 [build-system]
