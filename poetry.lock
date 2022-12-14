@@ -266,6 +266,25 @@ files = [
 Django = ">=3.2"
 
 [[package]]
+name = "django-phonenumber-field"
+version = "7.0.1"
+description = "An international phone number field for django models."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "django-phonenumber-field-7.0.1.tar.gz", hash = "sha256:9e2b302f239e4703fa9030e44833db5eb524a731335fd77b0b703bd352fbe8d0"},
+    {file = "django_phonenumber_field-7.0.1-py3-none-any.whl", hash = "sha256:969bbcab203d697ea44c38726bdc7d72ac9f1ba397694b9f57422b471ad73590"},
+]
+
+[package.dependencies]
+Django = ">=3.2"
+
+[package.extras]
+phonenumbers = ["phonenumbers (>=7.0.2)"]
+phonenumberslite = ["phonenumberslite (>=7.0.2)"]
+
+[[package]]
 name = "django-templated-mail"
 version = "1.1.1"
 description = "Send emails using Django template system."
@@ -968,4 +987,4 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "fd85a159e41adf0d845c796caf145f4067b6121106d896042f1a0afb677d6ee1"
+content-hash = "1f1dca1f9d34a6c3119c07443a0bdcfde26c57a551507400269415dd9c1462a9"
