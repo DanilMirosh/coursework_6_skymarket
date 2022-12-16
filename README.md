@@ -1,5 +1,5 @@
 # SkyPro.Python course
-## CW05. Skymarket - avito-like ads site
+## Skymarket - avito-like ads site
 
 ### Implementation
 
@@ -31,5 +31,3 @@ If for some reason you want to launch django manually:
 `django-admin runserver` to start backend
 
 
-Kirill Paveliev  
-September 2022
