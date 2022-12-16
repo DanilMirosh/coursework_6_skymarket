@@ -21,8 +21,7 @@ Just perform the following command: `docker-compose up --build -d`
 
 If for some reason you want to launch django manually:
 
-1. Change DATABASES['HOST'] to 'localhost' in line 92 in django_backend/django_backend/settings.py
-2. Perform the following commands in succession:  
+1. Perform the following commands in succession:  
 `cd deploy`  
 `docker-compose up --build -d` to start frontend and db
 `cd ../backend_django`  
