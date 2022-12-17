@@ -1,0 +1,98 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: postgres:12.4-alpine
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: always
+    ports:
+      - "5432:5432"
+
+  migrations:
+    build:
+      context: ..
+      dockerfile: dockerfile
+      args:
+        DJANGO_DEBUG: ${DJANGO_DEBUG}
+        DB_ENGINE: django.db.backends.postgresql
+        DB_NAME: ${DB_NAME}
+        DB_USER: ${DB_USER}
+        DB_PASSWORD: ${DB_PASSWORD}
+        DB_HOST: db
+        EMAIL_USE_TLS: ${EMAIL_USE_TLS}
+        EMAIL_USE_SSL: ${EMAIL_USE_SSL}
+        EMAIL_HOST: ${EMAIL_HOST}
+        EMAIL_HOST_USER: ${EMAIL_HOST_PASSWORD}
+        EMAIL_HOST_PASSWORD: ${EMAIL_HOST_PASSWORD}
+        EMAIL_PORT: ${EMAIL_PORT}
+    depends_on:
+      db:
+        condition: service_healthy
+    command: python manage.py migrate
+
+  backend:
+    build:
+      context: ..
+      dockerfile: dockerfile
+      args:
+        DJANGO_DEBUG: ${DJANGO_DEBUG}
+        DB_ENGINE: django.db.backends.postgresql
+        DB_NAME: ${DB_NAME}
+        DB_USER: ${DB_USER}
+        DB_PASSWORD: ${DB_PASSWORD}
+        DB_HOST: db
+        EMAIL_USE_TLS: ${EMAIL_USE_TLS}
+        EMAIL_USE_SSL: ${EMAIL_USE_SSL}
+        EMAIL_HOST: ${EMAIL_HOST}
+        EMAIL_HOST_USER: ${EMAIL_HOST_PASSWORD}
+        EMAIL_HOST_PASSWORD: ${EMAIL_HOST_PASSWORD}
+        EMAIL_PORT: ${EMAIL_PORT}
+    restart: always
+    env_file:
+      - ./.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+    command: python manage.py runserver
+
+  frontend:
+    build: ../frontend_react/.
+    volumes:
+      - frontend:/app/build
+    depends_on:
+      - db
+      - backend
+
+  nginx:
+    image: nginx:1.19.3
+    ports:
+      - "8000:8000"
+      - "3000:3000"
+    volumes:
+      - ../skymarket/django_static/:/usr/share/nginx/html/django_static/
+      - ../skymarket/django_media/:/usr/share/nginx/html/django_media/
+      - ./nginx.conf:/ect/nginx.conf.d/default.conf
+      - frontend:/usr/share/nginx/html/
+    restart: always
+    depends_on:
+      - db
+      - fronted
+
+volumes:
+  postgres_data:
+  frontend:
