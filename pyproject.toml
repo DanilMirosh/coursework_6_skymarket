@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "coursework-6-skymarket"
+version = "0.1.0"
+description = ""
+authors = ["Danil Mirosh <miroshnichenko.da.vi@mail.ru>"]
+readme = "README.md"
+packages = [{include = "coursework_6_skymarket"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+djangorestframework = "^3.14.0"
+django = "^4.1.4"
+django-rest-framework = "^0.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
