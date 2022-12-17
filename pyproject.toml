@@ -2,7 +2,7 @@
 name = "backend_django"
 version = "0.1.0"
 description = ""
-authors = ["kpaveliev <kpaveliev@gmail.com>"]
+authors = ["Danil Miroshnichenko"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
