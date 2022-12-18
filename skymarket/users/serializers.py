@@ -14,6 +14,8 @@ class UserRegistrationSerializer(BaseUserRegistrationSerializer):
 
 
 class CurrentUserSerializer(serializers.ModelSerializer):
+    email = serializers.CharField(read_only=True)
+
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "phone", "id", "email", "imge"]
+        fields = ["first_name", "last_name", "phone", "id", "email", "image"]
