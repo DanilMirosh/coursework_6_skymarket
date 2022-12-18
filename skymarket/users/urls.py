@@ -8,4 +8,3 @@ users_router.register("", UserViewSet, basename="users")
 urlpatterns = [
     path("", include(users_router.urls)),
 ]
-
