@@ -1,10 +1,6 @@
-from django.contrib.auth.models import (
-    BaseUserManager
-)
+from django.contrib.auth.models import BaseUserManager
 
 
-# TODO здесь должен быть менеджер для модели Юзера.
-# TODO Поищите эту информацию в рекомендациях к проекту
 class UserManager(BaseUserManager):
     """
     Функция создания пользователя - в нее передаем обязательные поля
@@ -43,4 +39,3 @@ class UserManager(BaseUserManager):
 
         user.save(using=self._db)
         return user
-

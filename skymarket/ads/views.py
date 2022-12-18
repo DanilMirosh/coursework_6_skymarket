@@ -8,9 +8,7 @@ from ads.models import Ad, Comment
 from ads.filters import AdsFilter
 from ads.permissions import IsOwnerOrStaff
 
-from ads.serializers import AdListSerializer, AdDetailSerializer, CommentViewSet
-
-from skymarket.ads.serializers import CommentSerializer
+from ads.serializers import AdListSerializer, AdDetailSerializer, CommentViewSet, CommentSerializer
 
 
 class AdPagination(pagination.PageNumberPagination):
